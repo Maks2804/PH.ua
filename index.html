@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Physic Helper</title>
+
+	<link rel="stylesheet" href="styles/reset.css">
+	<link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="styles/PhoneAdaptive.css">
+
+
+</head>
+<body>
+	
+	<div id="app">
+		<div class="left-mn">
+			<div class="mn-closed" @click="MenuClose">✕</div>
+
+			<div class="element-menu" v-for="fun in functions" @click="getIndex($event)">{{ fun }}</div>
+		</div>
+		<div class="header">
+			<div class="mn-open-btn"  id="menu" @click="MenuOpen">&#9776</div>
+			<h1>Physic Helper</h1>
+		</div>
+		<div class="container">
+			<div class="compBlock" v-if="index == 0">
+				<h2>Расчёт скорости</h2>
+
+				<label for="distance">Укажите путь(в метрах)</label>
+				<input type="text" name="distance" class="inputNumber" v-model="distance">
+				<label for="time">Укажите время(в секундах)</label>
+				<input type="text" name="time" class="inputNumber" v-model="time">
+
+				<div class="btn-container">
+					<button class="calculate" @click="calculateSpeed">Рассчитать</button>
+					<button class="reset" @click="reset">Очистить</button>
+				</div>
+				<p class="result"> {{ result }}</p>
+			</div>
+			<div class="compBlock" v-else-if="index == 1">
+				<h2>Расчёт расстояния</h2>
+
+				<label for="speed">Укажите скорость (в м/с)</label>
+				<input type="text" name="speed" class="inputNumber" v-model="speed">
+
+				<label for="time">Укажите время (в секундах)</label>
+				<input type="text" name="time" class="inputNumber" v-model="time">
+
+				<div class="btn-container">
+					<button class="calculate" @click="calculateDistance">Рассчитать</button>
+					<button class="reset" @click="reset">Очистить</button>
+				</div>
+				<p class="result"> {{ result }}</p>
+			</div>
+			<div class="compBlock" v-else-if="index == 2">
+				<h2>Расчёт времени</h2>
+
+				<label for="distance">Укажите расстояние (в метрах)</label>
+				<input type="text" class="inputNumber" name="distance" v-model="distance">
+
+				<label for="speed">Укажите скорость(в м/с)</label>
+				<input type="text" class="inputNumber" name="speed" v-model="speed">
+
+				<div class="btn-container">
+					<button class="calculate" @click="calculateTime">Рассчитать</button>
+					<button class="reset" @click="reset">Очистить</button>
+				</div>
+
+				<p class="result">{{ result }}</p>
+			</div>
+			<div class="compBlock" v-else-if="index == 3">
+				<h2>Рaсчёт плотности</h2>
+
+				<label for="weight">Укажите вес (в кг)</label>
+				<input type="text" name="weight" v-model="weight" class="inputNumber">
+
+				<label for="volume">Укажите объем в М<sup>3</sup></label>
+				<input type="text" name="volume" v-model="volume" class="inputNumber">
+
+				<div class="btn-container">
+					<button class="calculate" @click="calculateDensity">Рассчитать</button>
+					<button class="reset" @click="reset">Очистить</button>
+				</div>
+				<p class="result">{{ result }}</p>
+			</div>
+			<div class="compBlock" v-else-if="index == 4">
+				<h2>Расчёт давления</h2>
+
+				<label for="force">Укажите силу(в Ньютонах)</label>
+				<input type="text" name="force" class="inputNumber" v-model="force">
+
+				<label for="area">Укажите площать(в Метрах)</label>
+				<input type="text" name="area" class="inputNumber" v-model="area">
+
+				<div class="btn-container">
+					<button class="calculate" @click="calculatePressure">Рассчитать</button>
+					<button class="reset" @click="reset">Очистить</button>
+				</div>
+				<p class="result">{{ result }}</p>
+			</div>
+			<div class="compBlock" v-else-if="index == 5">
+				<h2>Расчёт мощности</h2>
+
+				<label for="work">Укажите выполненную работу(В Дж.)</label>
+				<input type="text" name="work" class="inputNumber" v-model="work">
+
+				<label for="time">Укажите время (в Секундах)</label>
+				<input type="text" name="time" class="inputNumber" v-model="time">
+
+				<div class="btn-container">
+					<button class="calculate" @click="calculateForce">Рассчитать</button>
+					<button class="reset" @click="reset">Очистить</button>
+				</div>
+				<p class="result">{{ result }}</p>
+			</div>
+			<div class="compBlock" v-else-if="index == 6">
+				<h2>Расчёт выполненной работы</h2>
+
+				<label for="force">Укажите силу(в Ньютонах)</label>
+				<input type="text" name="force" class="inputNumber" v-model="force">
+
+				<label for="distance">Укажите путь(в Метрах)</label>
+				<input type="text" name="distance" class="inputNumber" v-model="distance">
+
+				<div class="btn-container">
+					<button class="calculate" @click="calculateWork">Рассчитать</button>
+					<button class="reset" @click="reset">Очистить</button>
+				</div>
+				<p class="result">{{ result }}</p>
+			</div>
+			<div class="compBlock" v-else-if="index == 7">
+				<h2>Расчёт <span title="Коэффициент Полезного Действия" class="efficiency">КПД</span></h2>
+
+				<label for="usefulWork">Введите значение полезной работы(в Дж.)</label>
+				<input type="text" class="inputNumber" name="usefulWork" v-model="usefulWork">
+
+				<label for="work">Введите значение затраченной работы(так же в Дж.)</label>
+				<input type="text" name="work" class="inputNumber" v-model="work">
+
+				<div class="btn-container">
+					<button class="calculate" @click="calculateEfficiency">Рассчитать</button>
+					<button class="reset" @click="reset">Очистить</button>
+				</div>
+				<p class="result">{{ result }}</p>
+			</div>
+		</div>
+	</div>
+
+	
+	<script src="https://unpkg.com/animejs@3.0.1/lib/anime.js"></script>
+	<script src="https://unpkg.com/vue@next"></script>
+	<script src="scripts/main.js"></script>
+</body>
+</html>
