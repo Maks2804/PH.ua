@@ -34,7 +34,7 @@ body,html{
 }
 .left-mn{
 	width: 350px;
-	height: 130%;
+/* 	height: 130%; */
 	position:  absolute;
 	z-index: 1;
 	background-color: black;
