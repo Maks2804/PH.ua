@@ -34,8 +34,8 @@ body,html{
 }
 .left-mn{
 	width: 350px;
-	height: 100%;
-	position:  fixed;
+	height: 130%;
+	position:  absolute;
 	z-index: 1;
 	background-color: black;
 	transform: translateX(-400px);
