@@ -1,7 +1,7 @@
 const App = {
 	data(){
 		return{
-			functions: ["Скорость","Расстояние","Время","Плотность","Давление","Мощность","Работа","КПД"],
+			functions: ["Скорость","Расстояние","Время","Плотность","Давление","Мощность","Работа","КПД","Сила тока","Напряжение","Сопротивление","Импульс тела"],
 			index: 0,
 			speed: 0,
 			time: 0,
@@ -15,6 +15,9 @@ const App = {
 			power: 0,
 			work: 0,
 			usefulWork: 0,
+			amperage: 0,
+			voltage: 0,
+			resistance: 0,
 			result: ""
 		}
 	},
@@ -59,11 +62,23 @@ const App = {
 			else if(event.target.innerText == "КПД"){
 				this.index = 7;
 			}
+			else if(event.target.innerText == "Сила тока"){
+				this.index = 8;
+			}
+			else if(event.target.innerText == "Напряжение"){
+				this.index = 9;
+			}
+			else if(event.target.innerText == "Сопротивление"){
+				this.index = 10;
+			}
+			else if(event.target.innerText == "Импульс тела"){
+				this.index = 11;
+			}
 			this.MenuClose()
 		},
 		reset(){
 			this.work = 0,
-			this.index = 0,
+			// this.index = 0,
 			this.speed = 0,
 			this.time = 0,
 			this.distance = 0,
@@ -117,6 +132,26 @@ const App = {
 			let efficiency = (this.usefulWork / this.work) * 100
 
 			this.result = `КПД выполненной работы составляет ${efficiency.toFixed(1)}%`
+		},
+		calculateAmperage(){
+			let amperage = this.voltage / this.resistance
+
+			this.result = `Сила тока равна ${amperage.toFixed(1)} А`
+		},
+		calculateVoltage(){
+			let voltage = this.amperage * this.resistance
+
+			this.result = `Напряжение равно ${voltage.toFixed(1)} В`
+		},
+		calculateResistance(){
+			let resistance = this.voltage / this.amperage
+
+			this.result = `Сопротивление равно ${resistance.toFixed(1)} Ом`
+		},
+		calculatePulse(){
+			let pulse = this.weight * this.speed
+
+			this.result = `Импульс равен ${pulse.toFixed(1)} кг * м/с`
 		}
 	}
 }

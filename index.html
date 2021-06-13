@@ -144,6 +144,68 @@
 				</div>
 				<p class="result">{{ result }}</p>
 			</div>
+			<div class="compBlock" v-else-if="index == 8">
+				<h2>Расчёт силы тока</h2>
+
+				<label for="voltage">Укажите напряжение (в Вольтах)</label>
+				<input type="text" class="inputNumber" name="voltage" v-model="voltage">
+
+				<label for="resistance">Укажите сопротивление(в Омах)</label>
+				<input type="text" class="inputNumber" name="resistance" v-model="resistance">
+
+				<div class="btn-container">
+					<button class="calculate" @click="calculateAmperage">Рассчитать</button>
+					<button class="reset" @click="reset">Очистить</button>
+				</div>
+
+				<p class="result">{{ result }}</p>
+			</div>
+			<div class="compBlock" v-else-if="index == 9">
+				<h2>Расчёт напряжения</h2>
+
+				<label for="amperage">Введите силу тока (в Амперах)</label>
+				<input type="text" class="inputNumber" name="amperage" v-model="amperage">
+
+				<label for="resistance">Введите сопротивление (в Омах)</label>
+				<input type="text" class="inputNumber" name="resistance" v-model="resistance">
+
+				<div class="btn-container">
+					<button class="calculate" @click="calculateVoltage">Рассчитать</button>
+					<button class="reset" @click="reset">Очистить</button>
+				</div>
+
+				<p class="result">{{ result }}</p>
+			</div>
+			<div class="compBlock" v-else-if="index == 10">
+				<h2>Расчёт сопротивления</h2>
+
+				<label for="voltage">Укажите напряжение (в Вольтах)</label>
+				<input type="text" class="inputNumber" name="voltage" v-model="voltage">
+
+				<label for="amperage">Укажитие силу тока(в Амперах)</label>
+				<input type="text" class="inputNumber" name="amperage" v-model="amperage">
+
+				<div class="btn-container">
+					<button class="calculate" @click="calculateResistance">Рассчитать</button>
+					<button class="reset" @click="reset">Очистить</button>
+				</div>
+				<p class="result">{{ result }}</p>
+			</div>
+			<div class="compBlock" v-else-if="index == 11">
+				<h2>Расчёт импульса тела</h2>
+
+				<label for="weight">Укажите массу тела(в Кг.)</label>
+				<input type="text" class="inputNumber" name="weight" v-model="weight">
+
+				<label for="speed">Укажите скорость тела(в М/С)</label>
+				<input type="text" class="inputNumber" name="speed" v-model="speed">
+
+				<div class="btn-container">
+					<button class="calculate" @click="calculatePulse">Рассчитать</button>
+					<button class="reset" @click="reset">Очистить</button>
+				</div>
+				<p class="result">{{ result }}</p>
+			</div>
 		</div>
 	</div>
 
